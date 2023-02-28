@@ -1,6 +1,15 @@
-// [Missing Code 1] Include header file.
+#include<iostream>
+#include<string>
+#include<ctime>
+#include<cstdlib>
+#include<vector>
+#include<iomanip>
+#include"lab22.h"
+using namespace std;
+
   
 int main(){
+	system("cls");
 	srand(time(0));
 	
 	string name;	
@@ -9,7 +18,9 @@ int main(){
 	Unit hero("Hero",name);
 	
 	Equipment sword(0,8,4);
-	// [Missing Code 2]  Create Equipment axes, shield and armor here
+	Equipment axes(0,16,-3);
+	Equipment shield(0,-1,7);
+	Equipment armor(25,-2,2);
 
 	
 	
@@ -17,16 +28,20 @@ int main(){
 	cout << " [1] Sword \n [2] Axes \n [3] Shield \n [4] Armor \n";
 	cout << "Please selet your equipment: ";
 	cin >> eq;
-	// [Missing Code 3] Equip a selected equipment to the hero. 
+	if(eq == '1') hero.equip(&sword);
+	if(eq == '2') hero.equip(&axes);
+	if(eq == '3') hero.equip(&shield);
+	if(eq == '4') hero.equip(&armor);
 
 	
 	
 	Unit mons("Monster","Kraken");
-	
+
 	int turn_count = 1;
 	char player_action = '\0',monster_action = '\0';
 	int p = 0, m = 0;
 	while(true){
+		system("cls");
 		mons.newTurn();	
 		hero.newTurn();			
 		mons.showStatus();
@@ -57,7 +72,10 @@ int main(){
 			cout << " [1] Sword \n [2] Axes \n [3] Shield \n [4] Armor \n";
 			cout << "Please select your equipment: ";
 			cin >> eq;
-			// [Missing Code 3] Equip a selected equipment to the hero.
+			if(eq == '1') hero.equip(&sword);
+			if(eq == '2') hero.equip(&axes);
+			if(eq == '3') hero.equip(&shield);
+			if(eq == '4') hero.equip(&armor);
 
 			
 		}
@@ -67,12 +85,14 @@ int main(){
 		if(monster_action == 'U') m = mons.ultimateAttack(hero); 
 		
 		if(hero.isDead()){
+			system("cls");
 			drawScene(player_action,p,monster_action,m);
 			playerLose();
 			break; 
 		}
 		
 		if(mons.isDead()){
+			system("cls");
 			drawScene(player_action,p,monster_action,m);
 			playerWin();
 			break; 
